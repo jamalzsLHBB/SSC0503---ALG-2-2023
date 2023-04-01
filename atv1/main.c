@@ -14,9 +14,9 @@
 #include<string.h>
 #include<stdlib.h>
 
-#define SIZE 50;
+#define SIZE 50
 
-typedef struct cadlivros{
+struct Cadlivros{
     int id;
     char titulo[100];
     char autor[50];
@@ -24,19 +24,35 @@ typedef struct cadlivros{
 
 
 int main(){
-    FILE *arquivo;
-    struct cadlivros livros[SIZE];
+    struct Cadlivros livros[SIZE];    
     int r, m, i;
+    FILE *arquivo;
 
 
-    arquivo = fopen("lista_livros.bin", "rb+");
-    if(arquivo==NULL){
-        printf("Não foi possivel abrir o arquivo!");
-    }
+    printf("Digite o numero de registros: ");
+    scanf("%d", &r);
 
     for(i=0; i<r; i++){
         livros[i].id = i+1;
-        scanf("%s", livros[i].titulo);
-        scanf("%s", livros[i].autor);
+        printf("ID: %d\n");
+        printf("Titulo: ");
+        scanf(" %[^(\r|\n)]", livros[i].titulo); 
+        printf("Autor: ");
+        scanf(" %[^(\r|\n)]", livros[i].autor); 
     }
+
+    arquivo = fopen("livros.bin", "wb");
+    if(arquivo == NULL){
+        printf("Não foi possivel abLrir o arquivo!");
+        return 0;
+    }
+    
+    fwrite(livros, sizeof(struct Cadlivro), r, arquivo);
+    fclose(arquivo);
+
+    printf("quais o ultimos dados quer exibir: ");
+    scanf("%d", &m);
+
+
+    fclose(arquivo);
 }
