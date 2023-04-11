@@ -16,7 +16,7 @@
 
 #define SIZE 50
 
-struct Cadlivros{
+struct Cadlivros {
     int id;
     char titulo[100];
     char autor[50];
@@ -34,20 +34,20 @@ int main(){
 
     for(i=0; i<r; i++){
         livros[i].id = i+1;
-        printf("ID: %d\n");
+        printf("ID: %d\n", livros[i].id);
         printf("Titulo: ");
         scanf(" %[^(\r|\n)]", livros[i].titulo); 
         printf("Autor: ");
         scanf(" %[^(\r|\n)]", livros[i].autor); 
     }
-
+    
     arquivo = fopen("livros.bin", "wb");
     if(arquivo == NULL){
         printf("Não foi possivel abLrir o arquivo!");
         return 0;
     }
-    
-    fwrite(livros, sizeof(struct Cadlivro), r, arquivo);
+
+    fwrite(livros, sizeof(int), r, arquivo);
     fclose(arquivo);
 
     printf("quais o ultimos dados quer exibir: ");
