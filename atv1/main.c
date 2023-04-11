@@ -52,6 +52,11 @@ int main(){
 
     printf("quais o ultimos dados quer exibir: ");
     scanf("%d", &m);
+    fseek(arquivo, -(long)sizeof(int)*m, SEEK_END);
+    for(i=0; i<m; i++){
+        fread(&livros[i], sizeof(int),1, arquivo);
+        printf("ID: %d\nTitulo: %s\nAutor; %s\n", livros[i].id, livros[i].titulo, livros[i].autor);
+    }
 
 
     fclose(arquivo);
