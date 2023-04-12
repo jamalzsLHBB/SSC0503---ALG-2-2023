@@ -42,14 +42,10 @@ int main(){
     }
     
     arquivo = fopen("livros.bin", "wb");
-    if(arquivo == NULL){
-        printf("Não foi possivel abLrir o arquivo!");
-        return 0;
-    }
-
     fwrite(livros, sizeof(int), r, arquivo);
     fclose(arquivo);
 
+    arquivo = fopen("livros.bin", "rb");
     printf("quais o ultimos dados quer exibir: ");
     scanf("%d", &m);
     fseek(arquivo, -(long)sizeof(int)*m, SEEK_END);
